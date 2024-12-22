@@ -23,6 +23,7 @@ const exercises = [
   const currentExerciseEl = document.getElementById("current-exercise");
   const totalExercisesEl = document.getElementById("total-exercises");
   const beepAudio = document.getElementById("beep-audio");
+  const darkModeButton = document.getElementById("dark-mode-btn");  // Dark mode toggle button
   
   totalExercisesEl.textContent = exercises.length;
   
@@ -83,5 +84,19 @@ const exercises = [
     isMuted = !isMuted;
     document.getElementById("mute-btn").textContent = isMuted ? "Unmute" : "Mute";
   });
+  
+  darkModeButton.addEventListener("click", toggleDarkMode);
+  
+  // Check for dark mode preference in localStorage
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+  }
+  
+  // Toggle dark mode
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const darkModeEnabled = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', darkModeEnabled ? 'enabled' : 'disabled');
+  }
   
   updateExercise();  
